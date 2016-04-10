@@ -1,0 +1,46 @@
+﻿<Page
+    x:Class="BloodBankManagement.DonorDisplay"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:BloodBankManagement"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:data="using:BloodBankManagement.Model"
+    mc:Ignorable="d">
+    <Page.Resources>
+        <DataTemplate x:DataType="data:Donor" x:Key="DonorDataTemplate">
+            <Grid Width="140" Height="140" >
+                <Ellipse Width="50" Height="50" >
+                    <Ellipse.Fill>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <GradientStop Color="#FFCD3232" Offset="0"/>
+                            <GradientStop Color="#FF961E1E" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Ellipse.Fill>
+                </Ellipse>
+
+                <TextBlock FontSize="20" Text="{x:Bind BloodType}" TextAlignment="Center" Foreground="White" Margin="0,55,0,29" />
+                <TextBlock FontSize="12" Text="{x:Bind Age}" TextAlignment="Center" Margin="0,100,0,15"/>
+                <TextBlock FontSize="13" Text="{x:Bind Name}" TextAlignment="Center" Margin="0,116,0,0" />
+
+            </Grid>
+        </DataTemplate>
+    </Page.Resources>
+    
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Padding="32">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="100" />
+        </Grid.RowDefinitions>
+
+        <GridView ItemsSource="{x:Bind Donors}"
+                  IsItemClickEnabled="True"
+                  ItemClick="GridView_ItemClick"
+                  ItemTemplate="{StaticResource DonorDataTemplate}">
+
+        </GridView>
+        <Button x:Name="previousPage_Button" Content="Previous Page" HorizontalAlignment="Center" Grid.Row="1" VerticalAlignment="Center" Click="goBack_click"/>
+
+    </Grid>
+</Page>
